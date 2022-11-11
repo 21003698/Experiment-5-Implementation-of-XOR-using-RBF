@@ -55,8 +55,6 @@ def gaussian_rbf(x, landmark, gamma=1):
 def end_to_end(X1, X2, ys, mu1, mu2):
     from_1 = [gaussian_rbf(i, mu1) for i in zip(X1, X2)]
     from_2 = [gaussian_rbf(i, mu2) for i in zip(X1, X2)]
-    # plot
-    
     plt.figure(figsize=(13, 5))
     plt.subplot(1, 2, 1)
     plt.scatter((x1[0], x1[3]), (x2[0], x2[3]), label="Class_0")
@@ -78,9 +76,6 @@ def end_to_end(X1, X2, ys, mu1, mu2):
     plt.ylabel(f"$mu2$: {(mu2)}", fontsize=15)
     plt.title("Transformed Inputs: Linearly Seperable", fontsize=15)
     plt.legend()
-
-    # solving problem using matrices form
-    # AW = Y
     A = []
 
     for i, j in zip(from_1, from_2):
