@@ -30,14 +30,14 @@ The RBF of hidden neuron as gaussian function
 <img width="206" alt="image" src="https://user-images.githubusercontent.com/112920679/201302321-a09f72e9-2352-4f88-838c-3324f6c5f57e.png">
 
 
-## ALGORITHM:
+## ALGORIHM:
 
 /** Write the Algorithm in steps**/
 
 ## PROGRAM:
 ```
-Developed By: Challa Sandeep
-Registration Number: 212221240011
+Developed By:Challa Sandeep.
+Reg.No:212221240011.
 ```
 ```
 import numpy as np
@@ -46,11 +46,16 @@ import tensorflow as tf
 from tensorflow.keras.initializers import Initializer
 from tensorflow.keras.layers import Layer
 from tensorflow.keras.initializers import RandomUniform, Initializer, Constant
+```
+```
 def gaussian_rbf(x, landmark, gamma=1):
     return np.exp(-gamma * np.linalg.norm(x - landmark)**2)
+```
+```
 def end_to_end(X1, X2, ys, mu1, mu2):
     from_1 = [gaussian_rbf(i, mu1) for i in zip(X1, X2)]
     from_2 = [gaussian_rbf(i, mu2) for i in zip(X1, X2)]
+    # plot
     
     plt.figure(figsize=(13, 5))
     plt.subplot(1, 2, 1)
@@ -74,6 +79,8 @@ def end_to_end(X1, X2, ys, mu1, mu2):
     plt.title("Transformed Inputs: Linearly Seperable", fontsize=15)
     plt.legend()
 
+    # solving problem using matrices form
+    # AW = Y
     A = []
 
     for i, j in zip(from_1, from_2):
@@ -89,33 +96,47 @@ def end_to_end(X1, X2, ys, mu1, mu2):
     print(ys)
     print(f"Weights: {W}")
     return W
-def predict_matrix(point, weights):
+    ```
+    ```
+    def predict_matrix(point, weights):
     gaussian_rbf_0 = gaussian_rbf(np.array(point), mu1)
     gaussian_rbf_1 = gaussian_rbf(np.array(point), mu2)
     A = np.array([gaussian_rbf_0, gaussian_rbf_1, 1])
     return np.round(A.dot(weights))
-x1 = np.array([0, 0, 1, 1])
+    ```
+    ```
+    x1 = np.array([0, 0, 1, 1])
 x2 = np.array([0, 1, 0, 1])
 ys = np.array([0, 1, 1, 0])
-
 mu1 = np.array([0, 1])
 mu2 = np.array([1, 0])
-
 w = end_to_end(x1, x2, ys, mu1, mu2)
-
-
 print(f"Input:{np.array([0, 0])}, Predicted: {predict_matrix(np.array([0, 0]), w)}")
 print(f"Input:{np.array([0, 1])}, Predicted: {predict_matrix(np.array([0, 1]), w)}")
 print(f"Input:{np.array([1, 0])}, Predicted: {predict_matrix(np.array([1, 0]), w)}")
 print(f"Input:{np.array([1, 1])}, Predicted: {predict_matrix(np.array([1, 1]), w)}")
 ```
-
-
+```
+mu1 = np.array([0, 0])
+mu2 = np.array([1, 1])
+w = end_to_end(x1, x2, ys, mu1, mu2)
+print(f"Input:{np.array([0, 0])}, Predicted: {predict_matrix(np.array([0, 0]), w)}")
+print(f"Input:{np.array([0, 1])}, Predicted: {predict_matrix(np.array([0, 1]), w)}")
+print(f"Input:{np.array([1, 0])}, Predicted: {predict_matrix(np.array([1, 0]), w)}")
+print(f"Input:{np.array([1, 1])}, Predicted: {predict_matrix(np.array([1, 1]), w)}")
+```
 ## OUTPUT :
+![nn1](https://user-images.githubusercontent.com/93427522/201324580-b173007c-49a3-4c6e-b87d-077c520b98c8.png)
 
-<img width="933" alt="output" src="https://user-images.githubusercontent.com/93427522/201323971-c1a6dac9-63a4-4992-998c-f67c51ec864a.png">
+![nn2](https://user-images.githubusercontent.com/93427522/201324600-d0167f49-d522-4bd8-858d-300b0048ae50.png)
 
 
 ## RESULT:
+Thus Implementation of XOR problem using Radial Basis Function executed successfully.
 
-Therefore, Implementation-of-XOR-using-RBF is successfully implemented.
+
+
+
+
+
+
